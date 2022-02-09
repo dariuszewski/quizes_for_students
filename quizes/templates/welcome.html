@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+    {% block title %}Welcome{% endblock %}
+
+    {% block content %}
+
+
+        <p>
+            This is an application for students containing
+            <em>Example questions and answers</em> for exams.
+            Source code is available on 
+            <a href="https://www.pluralsight.com">GitHub</a>.
+        </p>
+
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+        
+              <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/static/bear.png" alt="">
+        
+                    <div class="card-body">
+                      <p class="card-text">System Administration</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Test</button>
+                          <a href="{{ url_for('api', topic='system_administration') }}">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                              API
+                            </button>
+                          </a>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/static/bird.png" alt="">        
+                    <div class="card-body">
+                      <p class="card-text">Networks</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Test</button>
+                          <a href="{{ url_for('api', topic='networks') }}">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                              API
+                            </button>
+                          </a>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="card shadow-sm">
+                    <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/static/monkey.png" alt="">        
+                    <div class="card-body">
+                      <p class="card-text">Operating Systems</p>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                          <button type="button" class="btn btn-sm btn-outline-secondary">Test</button>
+                          <a href="{{ url_for('api', topic='operating_systems') }}">
+                            <button type="button" class="btn btn-sm btn-outline-secondary">
+                              API
+                            </button>
+                          </a>
+                        </div>
+                        <small class="text-muted">9 mins</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}

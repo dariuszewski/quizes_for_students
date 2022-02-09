@@ -1,0 +1,29 @@
+body {
+    font-family: sans-serif;
+    color: cornflowerblue;
+    background-color: floralwhite;
+    text-align: center;
+}
+
+
+.topic {
+    border: solid 1px;
+    height: 270px;
+    width: 290px;
+    margin: 10px;
+}
+.topic img {
+
+    height: 80%;
+    width: 80%;
+    margin: auto;
+    display: block;
+}
+
+.topic p {
+    text-align: center;
+    font-size: medium;
+    background-color: black;
+    color: floralwhite;
+    float: bottom;
+}

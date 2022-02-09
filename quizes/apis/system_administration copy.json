@@ -1,0 +1,96 @@
+[
+    {
+        "id" : 1,
+        "question": "W pliku o rozszerzeniu ___ nie spodziewam się znaleźć opcji dotyczących konfiguracji usług.",
+        "answer": ".pid",
+        "answers": [".cfg", ".pid", ".ini", ".conf"]
+    },
+    {
+        "id" : 2,
+        "question": "W którym katalogu spodziewam się plików zawierających konfigurację usług?",
+        "answer": "\/etc",
+        "answers": ["\/home", "\/var", "\/tmp", "\/etc"]
+    },
+    {
+        "id" : 3,
+        "question": "Które polecenie załaduje nową konfigurację usługi mysql?",
+        "answer": "systemctl restart mysqld",
+        "answers": ["stop mysql; start mysq", "systemctl restart mysqld", "/etc/mysql mysql", "mysql -d restart"]
+    },
+    {
+        "id" : 4,
+        "question": "Które polecenie nie przeładuje konfiguracji usługi nginx?",
+        "answer": "nginx -r",
+        "answers": ["\/etc\/init.d\/nginx restart", "nginx -r", "systemctl reload nginx", "systemctl restart nginx"]
+    },
+    {
+        "id" : 5,
+        "question": "Metodą przekazywania konfiguracji usług jest...",
+        "answer": "Wszystkie odpowiedzi są poprawne",
+        "answers": ["Wszystkie odpowiedzi są poprawne", "plik konfiguracyjny", "konfiguracja zapisana w dedykowanej bazie danych", "ustawienie wartości jako zmienna środowiskowa"]
+    },
+    {
+        "id" : 6,
+        "question": "Jak sprawdzić czy serwis został uruchomiony i słucha na wybranym porcie (np:mysql 127.0.0.1:3306)?",
+        "answer": "Wszystkie odpowiedzi są poprawne",
+        "answers": ["nmap -sT -O 127.0.0.1", "plik konfiguracyjny", "konfiguracja zapisana w dedykowanej bazie danych", "ustawienie wartości jako zmienna środowiskowa"]
+    },
+    {
+        "id" : 7,
+        "question": "Metodą przekazywania konfiguracji usług jest...",
+        "answer": "żadne z powyższych",
+        "answers": ["update USER_USER_AUTHORIZED_KEYS=value", "żadne z powyższych", "expect USER_USER_AUTHORIZED_KEYS=value", "eval `ssh-agent`"]
+    },
+    {
+        "id" : 8,
+        "question": "Które polecenie wykona operację na zdalnej powłoce?",
+        "answer": "cp ec2-user@server “uptime”",
+        "answers": ["cp ec2-user@server “uptime”", "ssh-perform ec2-user@server “uptime”", "ssh-run ec2-user@server “uptime”"]
+    },
+    {
+        "id" : 9,
+        "question": "Która sekwencja ustawi zmienną środowiskową DB_ADDRESS dostepną podczas wykonania skryptu?",
+        "answer": "DB_ADDRESS=value; python setup.py",
+        "answers": ["DB_ADDRESS=value; python setup.py", "żadna z powyższych", "export DB_ADDRESS=value; python setup.py"]
+    },
+    {
+        "id" : 10,
+        "question": "W skład zestawu narzędzi open ssh wchodzą:",
+        "answer": "ssh, ssh-copy-id, ssh-agent, ssh-keygen",
+        "answers": ["żadne z powyższych", "ssh, ssh-copy-id, ssh-agent, ssh-keygen", "ssh, ssh-share-id, ssh-keyagent", "eval, ssh, ssh-add, ssh-copy-id"]
+    },
+    {
+        "id" : 11,
+        "question": "Który zestaw programów koncentruje się na zadaniach automatyzacji konfiguracji systemów?",
+        "answer": "chef, puppet, ansible",
+        "answers": ["chef, puppet, ansible", " bash, python, htop", "inux, apache, mysql, php (LAMP)", "openssh, telnet, RDP, VNC"]
+    },
+    {
+        "id" : 12,
+        "question": "Do popularnych protokołów umożliwiających zdalny dostęp do zdalnego systemu możemy zaliczyć...",
+        "answer": "SSH, telnet, RDP",
+        "answers": ["http, ftp, dns", " IP, IPX, UDP", "SSH, telnet, RDP", "http, SSH, SMTP"]
+    },
+    {
+        "id" : 13,
+        "question": "Metody autoryzacji dla protokołu SSH w openssh-server to...",
+        "answer": "użytkownik hasło, klucza prywatnego i publicznego",
+        "answers": ["użytkownik hasło, klucza prywatnego i publicznego", "żadna z powyższych", "Google oauth, klucz prywatny i publiczny", "Wyłącznie klucz prywatny i publiczny"]
+    },
+    {
+        "id" : 14,
+        "question": "Klucz prywatny typu RSA...",
+        "answer": "żadna z powyższych",
+        "answers": ["Do działania wymaga systemów z rodziny UNIX", "żadna z powyższych", "Wymaga podpisania przez zaufany podmiot certyfikujący", "umieszczam w sekcji authorized_keys"]
+    },
+    {
+        "id" : 15,
+        "question": "Klucz publiczny wygenerowany dla klucza prywatnego typu RSA",
+        "answer": "żadna z powyższych",
+        "answers": ["Do działania wymaga systemów z rodziny UNIX", "żadna z powyższych", "Wymaga podpisania przez zaufany podmiot certyfikujący", "umieszczam w sekcji authorized_keys"]
+    },
+    {
+        "question": "Enjoy your food",
+        "answer": "Smacznego"
+    }
+]
