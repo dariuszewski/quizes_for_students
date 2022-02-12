@@ -1,96 +1,133 @@
 [
     {
-        "id" : 1,
-        "question": "W pliku o rozszerzeniu ___ nie spodziewam sie znalezc opcji dotyczacych konfiguracji uslug.",
+        "question": "In file with extension ___ I'm not expecting to find configuration data.",
         "answer": ".pid",
         "answers": [".cfg", ".pid", ".ini", ".conf"]
     },
     {
-        "id" : 2,
-        "question": "W ktorym katalogu spodziewam sie plikow zawierajacych konfiguracje uslug?",
-        "answer": "\/etc",
-        "answers": ["\/home", "\/var", "\/tmp", "\/etc"]
+        "question": "In which directory can configuration files be found?",
+        "answer": "/etc",
+        "answers": ["/home", "/var", "/tmp", "/etc"]
     },
     {
-        "id" : 3,
-        "question": "Ktore polecenie zaladuje nowa konfiguracje uslugi mysql?",
-        "answer": "systemctl restart mysqld",
-        "answers": ["stop mysql; start mysq", "systemctl restart mysqld", "etc mysql mysql", "mysql -d restart"]
+
+        "question": "Which protocol is used by DHCP to send data?",
+        "answer": "UDP",
+        "answers": ["HTTP", "MMA", "TCP", "UDP"]
     },
     {
-        "id" : 4,
-        "question": "Ktore polecenie nie przeladuje konfiguracji uslugi nginx?",
-        "answer": "nginx -r",
-        "answers": ["etc\/init.d\/nginx restart", "nginx -r", "systemctl reload nginx", "systemctl restart nginx"]
+        "question": "To install Active Directory service in Windows Serwver, we need to configure ...",
+        "answer": "DNS",
+        "answers": ["DNS", "FTP", "DHCP", "WWW"]
     },
     {
-        "id" : 5,
-        "question": "Metoda przekazywania konfiguracji uslug jest...",
-        "answer": "Wszystkie odpowiedzi sa poprawne",
-        "answers": ["Wszystkie odpowiedzi sa poprawne", "plik konfiguracyjny", "konfiguracja zapisana w dedykowanej bazie danych", "ustawienie wartości jako zmienna środowiskowa"]
+        "question": "I want to install a program which is not available in base repository. How should I do it?",
+        "answer": "All of the above.",
+        "answers": ["Add third party repository.", "Install from source.", "Install precompiled version (ex. .deb)", "All of the above."]
     },
     {
-        "id" : 6,
-        "question": "Jak sprawdzic czy serwis zostal uruchomiony i slucha na wybranym porcie (np:mysql 127.0.0.1:3306)?",
-        "answer": "Wszystkie odpowiedzi sa poprawne",
-        "answers": ["nmap -sT -O 127.0.0.1", "plik konfiguracyjny", "konfiguracja zapisana w dedykowanej bazie danych", "ustawienie wartości jako zmienna środowiskowa"]
+        "question": "Choose linux command to change ownership rules of a files and directories.",
+        "answer": "chown",
+        "answers": ["ls", "chown", "change-owner", "chmod"]
     },
     {
-        "id" : 7,
-        "question": "Metoda przekazywania konfiguracji uslug jest...",
-        "answer": "zadne z powyzszych",
-        "answers": ["update USER_USER_AUTHORIZED_KEYS=value", "zadne z powyzszych", "expect USER_USER_AUTHORIZED_KEYS=value", "eval ssh-agent"]
-    },
-    {
-        "id" : 8,
-        "question": "Ktore polecenie wykona operacje na zdalnej powloce?",
-        "answer": "cp ec2-user@server 'uptime'",
-        "answers": ["cp ec2-user@server 'uptime'", "ssh-perform ec2-user@server 'uptime'", "ssh-run ec2-user@server 'uptime'"]
-    },
-    {
-        "id" : 9,
-        "question": "Ktora sekwencja ustawi zmienna środowiskowa DB_ADDRESS dostepna podczas wykonania skryptu?",
+        "question": "Which sequence will set variable DB_ADDRESS available during script execution?",
         "answer": "DB_ADDRESS=value; python setup.py",
-        "answers": ["DB_ADDRESS=value; python setup.py", "zadna z powyzszych", "export DB_ADDRESS=value; python setup.py"]
+        "answers": ["DB_ADDRESS=value; python setup.py", "żadna z powyższych", "export DB_ADDRESS=value; python setup.py"]
     },
     {
-        "id" : 10,
-        "question": "W sklad zestawu narzedzi open ssh wchodza:",
+        "question": "Select openSSH tools.",
         "answer": "ssh, ssh-copy-id, ssh-agent, ssh-keygen",
-        "answers": ["zadne z powyzszych", "ssh, ssh-copy-id, ssh-agent, ssh-keygen", "ssh, ssh-share-id, ssh-keyagent", "eval, ssh, ssh-add, ssh-copy-id"]
+        "answers": ["None below.", "ssh, ssh-copy-id, ssh-agent, ssh-keygen", "ssh, ssh-share-id, ssh-keyagent", "eval, ssh, ssh-add, ssh-copy-id"]
     },
     {
-        "id" : 11,
-        "question": "Ktory zestaw programow koncentruje sie na zadaniach automatyzacji konfiguracji systemow?",
+        "question": "Choose set of programs used for automation of system configuration.",
         "answer": "chef, puppet, ansible",
         "answers": ["chef, puppet, ansible", " bash, python, htop", "inux, apache, mysql, php (LAMP)", "openssh, telnet, RDP, VNC"]
     },
     {
-        "id" : 12,
-        "question": "Do popularnych protokolow umozliwiajacych zdalny dostep do zdalnego systemu mozemy zaliczyc...",
+        "question": "Choose remote access protocols.",
         "answer": "SSH, telnet, RDP",
         "answers": ["http, ftp, dns", " IP, IPX, UDP", "SSH, telnet, RDP", "http, SSH, SMTP"]
     },
     {
-        "id" : 13,
-        "question": "Metody autoryzacji dla protokolu SSH w openssh-server to...",
-        "answer": "uzytkownik haslo, klucza prywatnego i publicznego",
-        "answers": ["uzytkownik haslo, klucza prywatnego i publicznego", "zadna z powyzszych", "Google oauth, klucz prywatny i publiczny", "Wylacznie klucz prywatny i publiczny"]
+        "question": "Public key generated for private RSA key...",
+        "answer": "will be placed in authorized_keys.",
+        "answers": ["is avaliable ony in UNIX systems.", "requires a user's signature.", "will be placed in authorized_keys.", "none of the above."]
     },
     {
-        "id" : 14,
-        "question": "Klucz prywatny typu RSA...",
-        "answer": "zadna z powyzszych",
-        "answers": ["Do dzialania wymaga systemow z rodziny UNIX", "zadna z powyzszych", "Wymaga podpisania przez zaufany podmiot certyfikujacy", "umieszczam w sekcji authorized_keys"]
+        "question": "Choose set of commands used for changing service state.",
+        "answer": "start, status, restart, reload",
+        "answers": ["start, stop, restart", "load, unload, reload", "start, permission, status", "reload, up, down"]
     },
     {
-        "id" : 15,
-        "question": "Klucz publiczny wygenerowany dla klucza prywatnego typu RSA",
-        "answer": "zadna z powyzszych",
-        "answers": ["Do dzialania wymaga systemow z rodziny UNIX", "zadna z powyzszych", "Wymaga podpisania przez zaufany podmiot certyfikujacy", "umieszczam w sekcji authorized_keys"]
+        "question": "'$chmod 337 file_name' - this command will set following rules for 'file_name'...",
+        "answer": "-wx-wxrwx",
+        "answers": ["-wx-wxrwx", "-w-wxrwx", "-wx-wx-rwx", "wxwxrwx"]
     },
     {
-        "question": "Enjoy your food",
-        "answer": "Smacznego"
+        "question": "LDAP is...",
+        "answer": "Lightweight Directory Access Protocol",
+        "answers": ["LDAP Data Interchange Format", "Lightweight Directory Access Protocol", "LDAP Database Interchange Format", "LDAP Data File"]
+    },
+    {
+        "question": "RDS - Remote Desktop Services uses RDP protocol which is a used in ___ system family.",
+        "answer": "Windows",
+        "answers": ["Windows", "Linux", "MacOS", "All of the above."]
+    },
+    {
+        "question": "SSH uses port ...",
+        "answer": "22",
+        "answers": ["8080", "21", "22", "20"]
+    },
+    {
+        "question": "You want optimize time of system script execution. Which command can help you with estimation of how much system time does it take?",
+        "answer": "strace",
+        "answers": ["uptime", "ps aux", "top", "strace"]
+    },
+    {
+        "question": "Choose set of packet managment tools for OS.",
+        "answer": "apt, yum, brew",
+        "answers": ["nginx, apache, httpd", "pip, maven, npm", "git, svn, hg", "apt, yum, brew"]
+    },
+    {
+        "question": "NSLOOKUP in MS Windows will among others display...",
+        "answer": "IP address of DNS server.",
+        "answers": ["IP address of DNS server.", "IP address of DHCP server.", "IP address of host.", "IP address of default gate."]
+    },
+    {
+        "question": "NSLOOKUP in MS Windows will among others display...",
+        "answer": "IP address of DNS server.",
+        "answers": ["IP address of DNS server.", "IP address of DHCP server.", "IP address of host.", "IP address of default gate."]
+    },
+    {
+        "question": "Processes own info can be found in...",
+        "answer": "/proc/self",
+        "answers": ["/etc/proc/me", "/proc/self", "/procs/self", "proc/me"]
+    },
+    {
+        "question": "httpd service doesn't work on restart. Where should I find reasons?",
+        "answer": "/var/log/httpd/error.log",
+        "answers": ["/~", "/etc/passwd", "/etc/errors", "/var/log/httpd/error.log"]
+    },
+    {
+        "question": "Passive heath check of service availability...",
+        "answer": "/var/log/httpd/error.log",
+        "answers": ["/~", "/etc/passwd", "/etc/errors", "/var/log/httpd/error.log"]
+    },
+    {
+        "question": "When '@ WARNING: UNPROTECTED PRIVATE KEY FILE' will be called?",
+        "answer": "When public key have too wide access rights.",
+        "answers": ["When remote machine can't decode the key?", "When user doesn't have sudo rights.", "When private key have too wide access rights.", "When public key have too narrow access rights."]
+    },
+    {
+        "question": "What can Load Balancer do?",
+        "answer": "Reduce risk of service failure if one machine is broken.",
+        "answers": ["Reduce risk of service failure if one machine is broken.", "Reduce risk of failure of the machine it is installed on.", "Speed up single instance of application.", "All above."]
+    },
+    {
+        "question": "What Active Direcory does NOT allow to do?",
+        "answer": "Create local users.",
+        "answers": ["Create domain users.", "Create local users.", "Creation of global groups.", "Managing access to unshared resources."]
     }
 ]
