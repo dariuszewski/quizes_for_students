@@ -1,18 +1,63 @@
 {% extends "base.html" %}
+{% set active_page = 'add_card' %}
+{% block title %}Add Card{% endblock %}
 
-    {% block title %}Add Card{% endblock %}
+{% block content %}
+<p>Compose a question</p>
 
-    {% block content %}
-        <h1>Add a new card</h1>
+<div class="album py-5 bg-light">
+    <div class="container">
 
-        <form method="POST">
-            <p>Question:
-                <input type="text" name="question">
-            </p>
-            <p>Answer: 
-                <input type="text" name="answer">
-            </p>
-            <button type="submit">Create</button>
-        </form>
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col"></div>
+            <div class="col">
 
-    {% endblock %}
+                <div class="card shadow-sm ">
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="form-floating">
+                                <select class="form-select" id="floatingSelect" name="topic"
+                                    aria-label="Floating label select example">
+                                    <option value="system_administration">System Administration</option>
+                                    <option value="networks">Networks</option>
+                                    <option value="operating_system">Operating Systems</option>
+                                </select>
+                                <label for="floatingSelect">Topic</label>
+                            </div>
+                            <br>
+                            <div class="form-floating">
+                                <textarea class="form-control"
+                                    id="floatingTextarea" name="question" required></textarea>
+                                <label for="floatingTextarea">Question</label>
+                            </div>
+                            <br>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" name="correct_answer" required>
+                                <label for="floatingInput">Correct answer</label>
+                              </div>
+                              <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer1" required>
+                                <label for="floatingInput">Incorrect answer</label>
+                              </div>
+                              <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer2">
+                                <label for="floatingInput">Incorrect answer 2 - optional</label>
+                              </div>
+                              <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer3">
+                                <label for="floatingInput">Incorrect answer 3 - optional</label>
+                              </div>
+                            <button type="submit" class="btn btn-md btn-outline-secondary col-12">Create</button>
+
+                        </form>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

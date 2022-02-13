@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% set active_page = 'cards' %}
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+
+<p>
+    Question cards with answers for <em>{{ topic }}</em>.
+</p>
+<a href="{{ url_for('add_card') }}" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary">New Card</button></a>
+
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for card in cards %}
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text">{{ card['question'] }}</p>
+                            <hr>
+
+                                {% for answer in card['answers'] %}
+                                
+                                <p>
+                                    {% if answer == card['answer'] %}
+                                        <b>{{ answer }}</b>
+                                    {% else %}
+                                        {{ answer }}
+                                    {% endif %}
+                                </p>
+
+                                {% endfor %}
+                                
+
+                        </div>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

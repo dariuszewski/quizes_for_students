@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% set active_page = 'quiz' %}
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+
+
+<p>
+    Quiz of <em>{{ topic }}</em>. You have 9 minutes for 9 questions.
+</p>
+
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for challange in quiz %}
+                <div class="col">
+                    <form action="" method="POST">
+                        {% set challange_number = loop.index0 %}
+                    <div class="card shadow-sm">
+                        <div class="card-body">
+                            <p class="card-text">{{ challange['question'] }}</p>
+                            <hr>
+                            
+                                {% for answer in challange['answers'] %}
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="{{ challange_number }}" id="{{ challange }}"
+                                        value="{{ answer }}" checked="checked">
+                                    <label class="form-check-label" for="{{ challange }}">
+                                        {{ answer }}
+                                    </label>
+                                </div>
+                                {% endfor %}
+
+                        </div>                   
+                    </div>
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn btn-md btn-outline-secondary col-12">Finish</button>
+        </form>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

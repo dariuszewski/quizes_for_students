@@ -17,8 +17,9 @@
               </a>
         
               <ul class="nav nav-pills">
-                <li><a href="#" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary">Home</button></a></li>
-                <li><a href="#" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary">Home</button></a></li>
+                <li><a href="{{ url_for('welcome') }}" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary {{ 'active' if active_page == 'welcome' else '' }}">Home</button></a></li>
+                <li><a href="{{ url_for('search') }}"" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary {{ 'active' if active_page == 'search' else '' }}">Search</button></a></li>
+                <li><a href="{{ url_for('add_card') }}"" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary {{ 'active' if active_page == 'add_card' else '' }}">New Card</button></a></li>
                 <li><a href="#" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary">Home</button></a></li>
               </ul>
             </header>

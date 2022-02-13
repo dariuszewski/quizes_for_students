@@ -27,3 +27,12 @@ body {
     color: floralwhite;
     float: bottom;
 }
+
+.form-check > input:checked {
+    background-color: #2aa33ea2;
+}
+
+textarea {
+    resize: none;
+    rows: 3;
+}
