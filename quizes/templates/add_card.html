@@ -18,15 +18,15 @@
                             <div class="form-floating">
                                 <select class="form-select" id="floatingSelect" name="topic"
                                     aria-label="Floating label select example">
-                                    <option value="system_administration">System Administration</option>
-                                    <option value="networks">Networks</option>
-                                    <option value="operating_system">Operating Systems</option>
+                                    {% for api in db_config %}
+                                        <option value="{{ api['code'] }}">{{ api['dataset_title'] }}</option>  
+                                    {% endfor %}                                 
                                 </select>
                                 <label for="floatingSelect">Topic</label>
                             </div>
                             <br>
                             <div class="form-floating">
-                                <textarea class="form-control"
+                                <textarea rows="2" style="height:100%;" class="form-control"
                                     id="floatingTextarea" name="question" required></textarea>
                                 <label for="floatingTextarea">Question</label>
                             </div>
@@ -36,15 +36,15 @@
                                 <label for="floatingInput">Correct answer</label>
                               </div>
                               <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer1" required>
+                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer" required>
                                 <label for="floatingInput">Incorrect answer</label>
                               </div>
                               <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer2">
+                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer">
                                 <label for="floatingInput">Incorrect answer 2 - optional</label>
                               </div>
                               <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer3">
+                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer">
                                 <label for="floatingInput">Incorrect answer 3 - optional</label>
                               </div>
                             <button type="submit" class="btn btn-md btn-outline-secondary col-12">Create</button>

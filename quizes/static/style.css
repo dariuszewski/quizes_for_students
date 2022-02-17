@@ -1,7 +1,4 @@
 body {
-    font-family: sans-serif;
-    color: cornflowerblue;
-    background-color: floralwhite;
     text-align: center;
 }
 
@@ -34,5 +31,25 @@ body {
 
 textarea {
     resize: none;
-    rows: 3;
+    height:100%;
+}
+
+a.card_selection {
+    color: black;
+    text-decoration: none;
+    
+}
+a.card_selection:hover {
+    color: #2aa33ea2;
+    text-decoration: none;    
+}
+
+.form-group-flask {
+    text-align: left;
+    
+}
+
+.form-button {
+    width: 100%;
+    margin: 0 auto;
 }

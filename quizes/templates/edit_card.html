@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% set active_page = 'card' %}
+{% set itr = 0 %}
+{% block title %}Edit Card{% endblock %}
+{% from 'bootstrap5/form.html' import render_form, render_field %}
+{% block content %}
+
+
+<p>
+    Edit or delete selected card.
+</p>
+
+
+
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+            <div class="col"></div>
+            <div class="col">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <div class="form-group-flask">
+                            <form action="">
+                                {{ form.delete(type="submit", class="btn btn-md btn-outline-danger form-button") }}
+                                <hr>
+
+                                {{ form.hidden_tag() }}
+
+                                {{ render_field(form.topic, form_group_classes="") }}
+
+                                {{ render_field(form.question, rows="2") }}
+
+                                {{ render_field(form.answer) }}
+
+                                {% for ia in range(form.incorrect_answer_fields| length) %}
+                                {{ form.incorrect_answer_fields[ia].hidden_tag() }}
+                                {# Flask-WTF needs `hidden_tag()` so CSRF works for each form #}
+                                {{ render_field(form.incorrect_answer_fields[ia].incorrect_answer,
+                                value=incorrect_answers[ia]) }}
+                                {% endfor %}
+                                <hr>
+
+                                {{ form.update(type="submit", class="btn btn-md btn-outline-secondary form-button") }}
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

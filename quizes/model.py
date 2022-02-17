@@ -15,6 +15,10 @@ class Api:
     def generate_quiz(self):
         quiz = [self.data[i] for i in sample(range(len(self.data)-1), 9)]
         return quiz
+    
+    # def find_card(self, card_question):
+    #     card = list(filter(lambda x: self.data[x]['question'] == card_question, self.data))[0]
+    #     return card
 
     def find_phrase(self, phrase):
         # this function is not used yet
@@ -28,7 +32,7 @@ class Api:
 
 
 
-
+db_config = Api('db_config').data
 # adsk = Api('system_administration')
 # adsk.generate_quiz()
 # adsk.find_phrase('SSH')
