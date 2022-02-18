@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from 'bootstrap5/form.html' import render_form, render_field %}
 {% set active_page = 'add_card' %}
 {% block title %}Add Card{% endblock %}
 
@@ -13,43 +14,21 @@
             <div class="col">
 
                 <div class="card shadow-sm ">
-                    <div class="card-body">
+                    <div id="card-body" class="card-body">
                         <form method="POST">
-                            <div class="form-floating">
-                                <select class="form-select" id="floatingSelect" name="topic"
-                                    aria-label="Floating label select example">
-                                    {% for api in db_config %}
-                                        <option value="{{ api['code'] }}">{{ api['dataset_title'] }}</option>  
-                                    {% endfor %}                                 
-                                </select>
-                                <label for="floatingSelect">Topic</label>
+                            <div name="form-fields">
+                                {{ render_field(form.topic) }}
+                                {{ render_field(form.question) }}
+                                {{ render_field(form.answer) }}
+                                {{ render_field(form.incorrect_answer) }}
+                                <!-- Some more incorrect answers can be attached here -->
                             </div>
-                            <br>
-                            <div class="form-floating">
-                                <textarea rows="2" style="height:100%;" class="form-control"
-                                    id="floatingTextarea" name="question" required></textarea>
-                                <label for="floatingTextarea">Question</label>
-                            </div>
-                            <br>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="correct_answer" required>
-                                <label for="floatingInput">Correct answer</label>
-                              </div>
-                              <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer" required>
-                                <label for="floatingInput">Incorrect answer</label>
-                              </div>
-                              <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer">
-                                <label for="floatingInput">Incorrect answer 2 - optional</label>
-                              </div>
-                              <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" name="incorrect_answer">
-                                <label for="floatingInput">Incorrect answer 3 - optional</label>
-                              </div>
-                            <button type="submit" class="btn btn-md btn-outline-secondary col-12">Create</button>
-
+                            <button type="button" id="demo" class="btn btn-md btn-outline-secondary with-break"
+                                onclick="addField()">Add Answer</button>
+                                <br>
+                            {{ form.submit(type="submit", class="btn btn-md btn-outline-secondary form-button") }}
                         </form>
+
 
 
                     </div>
@@ -60,4 +39,5 @@
 
     </div>
 </div>
+
 {% endblock %}

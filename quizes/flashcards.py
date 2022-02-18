@@ -2,11 +2,11 @@ from distutils.command.config import config
 from math import sin
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for, flash, session
 from flask_bootstrap import Bootstrap5
-from forms import EditCardForm
+from forms import EditCardForm, NewCardForm
 import json
 import random
 import ast
-from model import Api
+from model import Api, Card
 
 app = Flask(__name__)
 app.secret_key='secret'
@@ -29,24 +29,29 @@ def cards(topic):
     cards = Api(topic).data
     return render_template("cards.html", topic=topic, cards=cards)
 
-@app.route("/edit_card/<single_card>", methods=["GET", "POST"])
-def edit_card(single_card):
+@app.route("/edit_card/<question>", methods=["GET", "POST"])
+def edit_card(question):
+
+    if request.method == "POST":
+        # flash(f'{form.data}')
+        return redirect(url_for('welcome'))
 
     # set view values
-    card_dict = ast.literal_eval(single_card)
-    incorrect_answers = list(filter(lambda x: x != card_dict['answer'], card_dict['answers']))
-
-    form = EditCardForm(incorrect_answer_fields=incorrect_answers)
+    card = Api(session['topic']).get_card_by_question(question)
     
-    form.question.data = card_dict['question']
-    form.answer.data = card_dict['answer']
+    incorrect_answers = list(filter(lambda x: x != card['answer'], card['answers']))
+    form = EditCardForm(incorrect_answer_fields=incorrect_answers)
 
-    iterator_incorrect_answers= iter(incorrect_answers)
-    for i in range(len(form.incorrect_answer_fields)):
-        form.incorrect_answer_fields[i].data['default_value'] = incorrect_answers[i]
+    form.topic.data = session['topic']
+    form.question.data = card['question']
+    form.answer.data = card['answer']
+
+    # for i in range(len(incorrect_answers)):
+    #     form.incorrect_answer_fields[i].data['default_value'] = incorrect_answers[i]
 
     return render_template(
-            "edit_card.html", topic=session['topic'], single_card=single_card, incorrect_answers=incorrect_answers, form=form)
+            "edit_card.html", card=card, form=form, incorrect_answers=incorrect_answers
+            )
 
 @app.route("/quiz/<topic>/", methods=["GET", "POST"])
 def quiz(topic):
@@ -74,28 +79,22 @@ def quiz(topic):
 
 @app.route("/add_card", methods=["GET", "POST"])
 def add_card():
+
     if request.method == "POST":
 
-        # create a list of all answers, exclude empty inputs, shuffle result.
-        all_answers = list(filter(lambda x: x != "", 
-                request.form.getlist('incorrect_answer') + [request.form['correct_answer']]
-            ))
-        random.shuffle(all_answers)
 
-        new_card = {
-            "question": request.form['question'],
-            "answer": request.form['correct_answer'],
-            "answers": all_answers
-        }
+        card = Card(request.form['topic'].replace(' ', '_').lower(), request.form['question'],
+         request.form['answer'], request.form.getlist('incorrect_answer'))
+        api = Api(request.form['topic'].replace(' ', '_').lower())
 
-        api = Api(request.form['topic'])
-        api.data.append(new_card)
+        api.add_card(card)
         api.save_api()
-        flash(f'New card was successfully added to {api.name} dataset.')
+
+        flash(f'New card was successfully added to {api.name} dataset {card}.')
         return redirect(url_for('welcome'))
 
-    db_config = Api('db_config').data
-    return render_template("add_card.html", db_config=db_config)
+    form = NewCardForm()
+    return render_template("add_card.html", form=form)
 
 
 @app.route("/search", methods=["GET", "POST"])
@@ -108,9 +107,3 @@ def search(phrase=None):
     else:
         return render_template(
             "search.html")
-
-# @app.route("/test", methods=["GET", "POST"])
-# def test():
-#     form = MyForm()
-#     return render_template(
-#             "test.html", form=form)

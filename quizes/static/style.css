@@ -53,3 +53,7 @@ a.card_selection:hover {
     width: 100%;
     margin: 0 auto;
 }
+
+.with-break {
+    margin-bottom: 10px;
+}
