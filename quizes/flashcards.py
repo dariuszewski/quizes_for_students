@@ -1,5 +1,3 @@
-from distutils.command.config import config
-from math import sin
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for, flash, session
 from flask_bootstrap import Bootstrap5
 from forms import EditCardForm, NewCardForm
@@ -29,6 +27,25 @@ def cards(topic):
     cards = Api(topic).data
     return render_template("cards.html", topic=topic, cards=cards)
 
+@app.route("/card/<int:index>")
+def card(index):
+    try:
+        api = Api(session['topic'])
+        card = api.data[index]
+        return render_template("card.html", card=card, index=index, max_index=len(api.data)-1)
+    except IndexError:
+        abort(404)
+
+@app.route("/delete_card/<int:index>")
+def delete_card(index):
+        api = Api(session['topic'])
+        # card = Card.from_api_record(api, api.data[index])
+        del api.data[index]
+        api.save_api()
+        flash('Selected card was successfully deleted.')
+        return redirect(url_for('cards', topic=session['topic']))
+
+
 @app.route("/add_card", methods=["GET", "POST"])
 def add_card():
 
@@ -49,32 +66,43 @@ def add_card():
     
     return render_template("add_card.html", form=form)
 
-@app.route("/edit_card/<question>", methods=["GET", "POST"])
-def edit_card(question):
+@app.route("/update_card/<int:index>", methods=["GET", "POST"])
+def update_card(index):
 
     api = Api(session['topic'])
+    card = Card.from_api_record(api.name, api.data[index])
 
-    card = Card.from_api_record(api.name, api.get_card_by_question(question))
-    
-    incorrect_answers = card.get_invalid_answers()
-    form = EditCardForm(incorrect_answer_fields=incorrect_answers)
+    # prepare data to fillup the form
 
     if request.method == "POST":
-        card = Card(request.form['topic'].replace(' ', '_').lower(), request.form['question'],
-         request.form['answer'], request.form.getlist('incorrect_answer'))
-        api = Api(request.form['topic'].replace(' ', '_').lower())
-        flash(f'{card}')
+        del api.data[index]
+        api.save_api()
+        flash('Selected card was successfully deleted.')
         return redirect(url_for('welcome'))
 
-
-
+    incorrect_answers = card.get_invalid_answers()
+    form = EditCardForm(incorrect_answer_fields=incorrect_answers)
     form.topic.data = session['topic']
     form.question.data = card.question
     form.answer.data = card.answer
+    return render_template("update_card.html", card=card, 
+    index=index, max_index=len(api.data)-1, form=form, 
+    incorrect_answers=incorrect_answers)
+
+    # if form.validate_on_submit:
+    #     card = Card(request.form['topic'].replace(' ', '_').lower(), request.form['question'],
+    #      request.form['answer'], request.form.getlist('incorrect_answer'))
+    #     api = Api(request.form['topic'].replace(' ', '_').lower())
+        
+
+        # flash(f'{card}')
+        # return redirect(url_for('welcome'))
+
 
     return render_template(
             "edit_card.html", card=card, form=form, incorrect_answers=incorrect_answers
             )
+
 
 @app.route("/quiz/<topic>/", methods=["GET", "POST"])
 def quiz(topic):

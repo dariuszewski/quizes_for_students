@@ -7,17 +7,13 @@
 
 <p>
     <button type="button" id="demo" class="btn btn-sm btn-outline-secondary" onclick="displayMessage()">Edit</button>  or 
-    <button type="button" id="demo" class="btn btn-sm btn-outline-danger",>Delete</button> selected card.
+    <a href="{{ url_for('update_card', index=index) }}">
+        <button type="button" id="demo" class="btn btn-sm btn-outline-danger" onclick="return confirm('Are you sure you want to delete this card?')">Delete</button></a> selected card.
 </p>
 
 
-
-<script>
-    var someJavaScriptVar = 2;
-  </script>
-
 <div class="album py-5 bg-light">
-    <div class="container" onload="addFieldsFromList(3)">
+    <div class="container">
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
@@ -46,7 +42,13 @@
                                 onclick="addField()">Add Answer</button>
                                 <br>
                             </div>
-                                {{ form.update(type="submit", class="btn btn-md btn-outline-secondary form-button") }}
+                            <div class="inline-block">
+                                {{ form.update(type="submit", class="btn btn-md btn-outline-secondary form-button inline-block") }}
+                            </div>
+                            <div class="inline-block">
+                                {{ form.delete(type="submit", class="btn btn-md btn-outline-danger form-button inline-block") }}
+                            </div>
+
                             </form>
                         </div>
                     </div>

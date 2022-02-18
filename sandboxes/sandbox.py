@@ -125,4 +125,20 @@ def api_card_view(index):
         return db[index]
     except IndexError:
         abort(404)
+
+
+
+                    <button>
+                {% if index < max_index %}
+                    <a href="{{ url_for('card_view', index=index + 1) }}">
+                        Next card
+                {% else %}
+                    <a href="{{ url_for('card_view', index=0) }}">
+                        Start over
+                    </a>
+                {% endif %}
+            </button>
+        </p>
+
+        <a href="{{ url_for('remove_card', index=index) }}">Remove this card</a>
 '''

@@ -57,3 +57,7 @@ a.card_selection:hover {
 .with-break {
     margin-bottom: 10px;
 }
+
+.inline-block {
+    display: inline-block;
+}

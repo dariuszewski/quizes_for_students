@@ -1,25 +1,50 @@
 {% extends "base.html" %}
 
-    {% block title %}Card{% endblock %}
+{% block title %}Card - {{ index }}{% endblock %}
 
-    {% block content %}
-        <h1>Flash Cards</h1>
-        Question: {{ card.question }} <br>
-        Answer: {{ card.answer }}
-        <p>
-            <a href="{{ url_for('welcome') }}">Home</a>
+{% block content %}
+<p>
+    <a href="{{ url_for('update_card', index=index) }}">
+        <button type="button" id="demo" class="btn btn-sm btn-outline-secondary">Edit</button>
+    </a>  or 
+    <a href="{{ url_for('delete_card', index=index) }}" onclick="return confirm('Are you sure you want to delete this card?')">
+        <button type="button" id="demo" class="btn btn-sm btn-outline-danger">Delete</button></a> selected card.
+    
+    
+</p>
 
-            <button>
-                {% if index < max_index %}
-                    <a href="{{ url_for('card_view', index=index + 1) }}">
-                        Next card
-                {% else %}
-                    <a href="{{ url_for('card_view', index=0) }}">
-                        Start over
-                    </a>
-                {% endif %}
-            </button>
-        </p>
+<div class="album py-5 bg-light">
+    <div class="container">
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="col"></div>
+            <!-- <a class="card_selection" href="{{ url_for('card', index=index) }}"> -->
+                <div class="col">
+                    <div class="card shadow-sm">
+                        <div class="card-body">
 
-        <a href="{{ url_for('remove_card', index=index) }}">Remove this card</a>
-    {% endblock %}
+                            <p class="card-text">{{ card.question }}</p>
+
+                            <hr>
+
+                            {% for answer in card.answers %}
+
+                            <p>
+                                {% if answer == card.answer %}
+                                <b>{{ answer }}</b>
+                                {% else %}
+                                {{ answer }}
+                                {% endif %}
+                            </p>
+
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            <!-- </a> -->
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

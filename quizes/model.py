@@ -7,7 +7,7 @@ class Card:
         self.topic = topic
         self.question = question
         self.answer = answer
-        self.answers = incorrect_answers + [answer]
+        self.answers = list(set(incorrect_answers + [answer]))
         # shuffle the answers
         shuffle(self.answers)
 
@@ -50,6 +50,9 @@ class Api:
 
     def add_card(self, card):
         self.data.append(card.transform_to_api_record())
+
+    def remove_card(self, card):
+        self.data.remove(card.transform_to_api_record())
 
 
     def get_card_by_question(self, question):

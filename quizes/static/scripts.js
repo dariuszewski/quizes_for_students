@@ -13,6 +13,3 @@ function addField() {
 
 }
 
-function displayMessage() {
-  window.alert("Check your changes and submit with the bottom button.");
-}

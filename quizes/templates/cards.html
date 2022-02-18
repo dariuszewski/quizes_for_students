@@ -6,6 +6,12 @@
 
 
 <p>
+    {% if get_flashed_messages() %}
+    <div class="alert alert-success" role="alert">
+      {{ get_flashed_messages()[0] }}
+    </div>
+    {% endif %}
+    
     Question cards with answers for <em>{{ topic }}</em> Click to edit or delete it.
 </p>
 <a href="{{ url_for('add_card') }}" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary">New
@@ -17,7 +23,7 @@
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
             {% for card in cards %}
-            <a class="card_selection" href="{{ url_for('edit_card', question=card['question']) }}">
+            <a class="card_selection" href="{{ url_for('card', index=cards.index(card)) }}">
             <div class="col">
                 <div class="card shadow-sm">
                     <div class="card-body">
