@@ -11,4 +11,8 @@ function addField() {
 
   document.getElementById('form-fields').innerHTML += '<br>'
 
-  }
+}
+
+function displayMessage() {
+  window.alert("Check your changes and submit with the bottom button.");
+}

@@ -10,6 +10,19 @@ class Card:
         self.answers = incorrect_answers + [answer]
         # shuffle the answers
         shuffle(self.answers)
+
+    @classmethod
+    def from_api_record(cls, topic, record):
+        question = record['question']
+        answer = record['answer']
+        answers = list(filter(lambda x: x != record['answer'], record['answers']))
+
+        card_from_api = cls(topic, question, answer, answers)
+        return card_from_api
+
+    def get_invalid_answers(self):
+        invalid_answers =  list(filter(lambda x: x != self.answer, self.answers))
+        return invalid_answers
     
     def transform_to_api_record(self):
         card = {
@@ -59,9 +72,9 @@ class Api:
 
 #db_config = Api('db_config').data
 # adsk = Api('system_administration')
-# adsk.get_card_by_question('In file with extension ___ I\'m not expecting to find configuration data.')
-# card = Card('a', 'b', 'c', 'd', 'e')
-# card.answers
+# c = adsk.get_card_by_question('In file with extension ___ I\'m not expecting to find configuration data.')
+# card = Card.from_api_record(adsk.name, c)
+# card.question
 
 # adsk.find_phrase('SSH')
 #new_question = {'question': 'Enjoy your food', 'answer': 'Smacznego'}

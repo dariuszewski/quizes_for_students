@@ -6,14 +6,18 @@
 
 
 <p>
-    Edit or delete selected card.
+    <button type="button" id="demo" class="btn btn-sm btn-outline-secondary" onclick="displayMessage()">Edit</button>  or 
+    <button type="button" id="demo" class="btn btn-sm btn-outline-danger",>Delete</button> selected card.
 </p>
 
 
 
+<script>
+    var someJavaScriptVar = 2;
+  </script>
 
 <div class="album py-5 bg-light">
-    <div class="container">
+    <div class="container" onload="addFieldsFromList(3)">
 
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
@@ -21,24 +25,27 @@
             <div class="col">
                 <div class="card shadow-sm">
                     <div class="card-body">
-                        <div class="form-group-flask">
+                        <div class="form-group">
                             {{ session['topic'] }}
                             {{ t }}
                             <form action="POST">
                                 {{ card }}
+                                <div name="form-fields">
                                 {{ render_field(form.topic) }}
 
                                 {{ render_field(form.question, rows="2") }}
 
                                 {{ render_field(form.answer) }}
 
-                                <!-- {% for ia in range(form.incorrect_answer_fields| length) %}
-                                {{ form.incorrect_answer_fields[ia].hidden_tag() }}
+                                {% for i in incorrect_answers %}
+                                {{ render_field(form.incorrect_answer, value=i) }}
                                 {# Flask-WTF needs `hidden_tag()` so CSRF works for each form #}
-                                {{ render_field(form.incorrect_answer_fields[ia].incorrect_answer,
-                                value=incorrect_answers[ia]) }}
-                                {% endfor %} -->
+                                {% endfor %}
 
+                                <button type="button" id="demo" class="btn btn-md btn-outline-secondary with-break"
+                                onclick="addField()">Add Answer</button>
+                                <br>
+                            </div>
                                 {{ form.update(type="submit", class="btn btn-md btn-outline-secondary form-button") }}
                             </form>
                         </div>

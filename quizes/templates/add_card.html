@@ -17,6 +17,7 @@
                     <div id="card-body" class="card-body">
                         <form method="POST">
                             <div name="form-fields">
+                                {{ form.csrf_token }}
                                 {{ render_field(form.topic) }}
                                 {{ render_field(form.question) }}
                                 {{ render_field(form.answer) }}
@@ -28,12 +29,9 @@
                                 <br>
                             {{ form.submit(type="submit", class="btn btn-md btn-outline-secondary form-button") }}
                         </form>
-
-
-
                     </div>
-
                 </div>
+
             </div>
         </div>
 
