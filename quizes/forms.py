@@ -25,4 +25,3 @@ class EditCardForm(FlaskForm):
     incorrect_answer = StringField(label="Incorrect Answers", validators=[DataRequired()])
     #incorrect_answer_fields= FieldList(FormField(IncorrectAnsewrForm), min_entries=1, validators=[DataRequired()])
     update = SubmitField(label="Update")
-    delete = SubmitField(label="Delete")

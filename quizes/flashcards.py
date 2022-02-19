@@ -36,6 +36,7 @@ def card(index):
     except IndexError:
         abort(404)
 
+
 @app.route("/delete_card/<int:index>")
 def delete_card(index):
         api = Api(session['topic'])
@@ -68,40 +69,24 @@ def add_card():
 
 @app.route("/update_card/<int:index>", methods=["GET", "POST"])
 def update_card(index):
-
     api = Api(session['topic'])
     card = Card.from_api_record(api.name, api.data[index])
-
-    # prepare data to fillup the form
+    form = EditCardForm()
 
     if request.method == "POST":
         del api.data[index]
         api.save_api()
-        flash('Selected card was successfully deleted.')
+        api = Api(request.form['topic'].replace(' ', '_').lower())
+        new_card =  Card(request.form['topic'].replace(' ', '_').lower(), request.form['question'],
+        request.form['answer'], request.form.getlist('incorrect_answer'))
+        api.add_card(new_card)
+        api.save_api()
+        flash(f"Card was successfully updated.")
         return redirect(url_for('welcome'))
-
-    incorrect_answers = card.get_invalid_answers()
-    form = EditCardForm(incorrect_answer_fields=incorrect_answers)
-    form.topic.data = session['topic']
+    form.topic.data = card.topic
     form.question.data = card.question
     form.answer.data = card.answer
-    return render_template("update_card.html", card=card, 
-    index=index, max_index=len(api.data)-1, form=form, 
-    incorrect_answers=incorrect_answers)
-
-    # if form.validate_on_submit:
-    #     card = Card(request.form['topic'].replace(' ', '_').lower(), request.form['question'],
-    #      request.form['answer'], request.form.getlist('incorrect_answer'))
-    #     api = Api(request.form['topic'].replace(' ', '_').lower())
-        
-
-        # flash(f'{card}')
-        # return redirect(url_for('welcome'))
-
-
-    return render_template(
-            "edit_card.html", card=card, form=form, incorrect_answers=incorrect_answers
-            )
+    return render_template("update_card.html", card=card, index=index, max_index=len(api.data)-1, form=form)
 
 
 @app.route("/quiz/<topic>/", methods=["GET", "POST"])

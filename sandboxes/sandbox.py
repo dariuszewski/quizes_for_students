@@ -128,17 +128,59 @@ def api_card_view(index):
 
 
 
-                    <button>
-                {% if index < max_index %}
-                    <a href="{{ url_for('card_view', index=index + 1) }}">
-                        Next card
-                {% else %}
-                    <a href="{{ url_for('card_view', index=0) }}">
-                        Start over
-                    </a>
-                {% endif %}
-            </button>
-        </p>
+@app.route("/update_card/<int:index>", methods=["GET", "POST"])
+def update_card(index):
 
-        <a href="{{ url_for('remove_card', index=index) }}">Remove this card</a>
+    api = Api(session['topic'])
+    card = Card.from_api_record(api.name, api.data[index])
+    incorrect_answers = card.get_invalid_answers()
+    form = EditCardForm(incorrect_answer_fields=incorrect_answers)
+
+    if request.method == "POST":
+        flash('Selected card was successfully deleted.')
+        return redirect(url_for('welcome'))
+
+    if form.validate_on_submit():
+        flash('Selected card was successfully deleted.')
+        return redirect(url_for('welcome'))
+        card.question = request.form.question.data
+        card.answer = request.form.answer.data
+        card.answers = request.form.getlist('incorrect_answer') + [form.answer]
+        flash('Selected card was successfully deleted.')
+        return redirect(url_for('welcome'))
+        # updated_card = Card(request.form['topic'].replace(' ', '_').lower(), request.form['question'],
+        #  request.form['answer'], request.form.getlist('incorrect_answer'))
+        # api = Api(request.form['topic'].replace(' ', '_').lower())
+        # del api.data[index]
+        # api.save_api()
+        card = updated_card = 1
+        if updated_card == card:
+            flash('Selected card was successfully deleted.')
+            return redirect(url_for('welcome'))
+        else:
+            flash('Equality test fail')
+            return redirect(url_for('welcome'))
+
+    form.topic.data = session['topic']
+    form.question.data = card.question
+    form.answer.data = card.answer
+
+    return render_template("update_card.html", card=card, 
+    index=index, max_index=len(api.data)-1, form=form, 
+    incorrect_answers=incorrect_answers)
+
+    # if form.validate_on_submit:
+    #     card = Card(request.form['topic'].replace(' ', '_').lower(), request.form['question'],
+    #      request.form['answer'], request.form.getlist('incorrect_answer'))
+    #     api = Api(request.form['topic'].replace(' ', '_').lower())
+        
+
+        # flash(f'{card}')
+        # return redirect(url_for('welcome'))
+
+
+    return render_template(
+            "edit_card.html", card=card, form=form, incorrect_answers=incorrect_answers
+            )
+        
 '''

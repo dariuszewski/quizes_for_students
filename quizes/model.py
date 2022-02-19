@@ -32,6 +32,11 @@ class Card:
         }
         return card
 
+    def __eq__(self, other):
+        self.answers.sort()
+        other.answers.sort()
+        return self.transform_to_api_record() == other.transform_to_api_record()
+
 
 class Api:
 
