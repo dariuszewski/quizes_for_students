@@ -1,10 +1,10 @@
 from flask import Flask, render_template, abort, jsonify, request, redirect, url_for, flash, session
 from flask_bootstrap import Bootstrap5
-from forms import EditCardForm, NewCardForm
+from forms import CardForm
 import json
 import random
 import ast
-from model import Api, Card
+from models import Database, Api
 
 app = Flask(__name__)
 app.secret_key='secret'
@@ -12,53 +12,59 @@ bootstrap = Bootstrap5(app)
 
 @app.route("/")
 def welcome():
-    return render_template(
-        "welcome.html")
+
+    return render_template("welcome.html", db=Database().data)
 
 
 @app.route("/api/<topic>/")
 def api(topic):
+
     return jsonify(Api(topic).data)
+
 
 
 @app.route("/cards/<topic>/")
 def cards(topic):
+
     session['topic'] = topic
     cards = Api(topic).data
+    for card in cards:
+        card['question_code'] = card['question'].lower().replace(' ', '')
     return render_template("cards.html", topic=topic, cards=cards)
 
-@app.route("/card/<int:index>")
-def card(index):
-    try:
-        api = Api(session['topic'])
-        card = api.data[index]
-        return render_template("card.html", card=card, index=index, max_index=len(api.data)-1)
-    except IndexError:
-        abort(404)
 
+@app.route("/card/<question_code>")
+def card(question_code):
 
-@app.route("/delete_card/<int:index>")
-def delete_card(index):
+    api = Api(session['topic'])
+    card = api.get_card_by_question(question_code)
+    return render_template("card.html", card=card, question_code=question_code)
+
+@app.route("/delete_card/<question_code>")
+def delete_card(question_code):
+
         api = Api(session['topic'])
-        # card = Card.from_api_record(api, api.data[index])
-        del api.data[index]
+        api.remove_card_by_question(question_code)
         api.save_api()
         flash('Selected card was successfully deleted.')
-        return redirect(url_for('cards', topic=session['topic']))
+        return redirect(url_for('cards', topic=session['topic'], question_code=question_code))
 
 
 @app.route("/add_card", methods=["GET", "POST"])
 def add_card():
 
-    form = NewCardForm()
+    form = CardForm()
 
     if form.validate_on_submit():
 
-        card = Card(request.form['topic'].replace(' ', '_').lower(), request.form['question'],
-         request.form['answer'], request.form.getlist('incorrect_answer'))
         api = Api(request.form['topic'].replace(' ', '_').lower())
+        new_card = {
+            "question": request.form['question'],
+            "answer": request.form['answer'],
+            "answers": request.form.getlist('incorrect_answer') + [request.form['answer']]
+        }
 
-        api.add_card(card)
+        api.data.append(new_card)
         api.save_api()
 
         flash(f'New card was successfully added to {api.name} dataset {card}.', 'success')
@@ -67,26 +73,38 @@ def add_card():
     
     return render_template("add_card.html", form=form)
 
-@app.route("/update_card/<int:index>", methods=["GET", "POST"])
-def update_card(index):
+
+@app.route("/update_card/<question_code>", methods=["GET", "POST"])
+def update_card(question_code):
+
     api = Api(session['topic'])
-    card = Card.from_api_record(api.name, api.data[index])
-    form = EditCardForm()
+    card = api.get_card_by_question(question_code)
+    form = CardForm()
 
     if request.method == "POST":
-        del api.data[index]
+        # delte old version
+        api.remove_card_by_question(question_code)
         api.save_api()
+        # save new version
         api = Api(request.form['topic'].replace(' ', '_').lower())
-        new_card =  Card(request.form['topic'].replace(' ', '_').lower(), request.form['question'],
-        request.form['answer'], request.form.getlist('incorrect_answer'))
-        api.add_card(new_card)
+        new_card = {
+            "question": request.form['question'],
+            "answer": request.form['answer'],
+            "answers": request.form.getlist('incorrect_answer') + [request.form['answer']]
+        }
+
+        api.data.append(new_card)
         api.save_api()
+
         flash(f"Card was successfully updated.")
         return redirect(url_for('welcome'))
-    form.topic.data = card.topic
-    form.question.data = card.question
-    form.answer.data = card.answer
-    return render_template("update_card.html", card=card, index=index, max_index=len(api.data)-1, form=form)
+
+    form.topic.data = api.name
+    form.question.data = card['question']
+    form.answer.data = card['answer']
+    invalid_answers =  list(filter(lambda x: x != card['answer'], card['answers']))
+
+    return render_template("update_card.html", card=card, question_code=question_code, form=form, invalid_answers=invalid_answers)
 
 
 @app.route("/quiz/<topic>/", methods=["GET", "POST"])

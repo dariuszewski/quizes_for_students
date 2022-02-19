@@ -1,14 +1,17 @@
 [
     {
         "dataset_title": "System Administration",
-        "code": "system_administration"
+        "code": "system_administration",
+        "image": "bear.png"
     },
     {
         "dataset_title": "Networks",
-        "code": "networks"
+        "code": "networks",
+        "image": "bird.png"
     },
     {
         "dataset_title": "Operating Systems",
-        "code": "operating_systems"
+        "code": "operating_systems",
+        "image": "monkey.png"
     }
 ]

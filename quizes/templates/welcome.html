@@ -5,44 +5,46 @@
 {% block content %}
 
 
-<p>  
+<p>
 
   {% if get_flashed_messages() %}
-  <div class="alert alert-success" role="alert">
-    {{ get_flashed_messages()[0] }}
-  </div>
-  {% endif %}
+<div class="alert alert-success" role="alert">
+  {{ get_flashed_messages()[0] }}
+</div>
+{% endif %}
 
-  This is an application for students containing
-  <em>Example questions and answers</em> for exams.
-  Source code is available on
-  <a href="https://www.pluralsight.com">GitHub</a>.
+This is an application for students containing
+<em>Example questions and answers</em> for exams.
+Source code is available on
+<a href="https://github.com/dariuszewski/quizes_for_students">GitHub</a>.
+
 </p>
-
 
 <div class="album py-5 bg-light">
   <div class="container">
-
     <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      
+      {% for api in db %}
+
       <div class="col">
         <div class="card shadow-sm">
-          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/static/bear.png" alt="">
-
+          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/static/images/{{ api['image'] }}"
+            alt="">
           <div class="card-body">
-            <p class="card-text">System Administration</p>
+            <p class="card-text">{{ api['dataset_title'] }}</p>
             <div class="d-flex justify-content-between align-items-center">
               <div class="btn-group">
-                <a href="{{ url_for('api', topic='system_administration') }}">
+                <a href="{{ url_for('api', topic=api['code']) }}">
                   <button type="button" class="btn btn-sm btn-outline-secondary">
                     API
                   </button>
                 </a>
-                <a href="{{ url_for('cards', topic='system_administration') }}">
+                <a href="{{ url_for('cards', topic=api['code']) }}">
                   <button type="button" class="btn btn-sm btn-outline-secondary">
                     Cards
                   </button>
                 </a>
-                <a href="{{ url_for('quiz', topic='system_administration') }}">
+                <a href="{{ url_for('quiz', topic=api['code']) }}">
                   <button type="button" class="btn btn-sm btn-outline-secondary">Test</button>
                 </a>
 
@@ -52,61 +54,12 @@
           </div>
         </div>
       </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/static/bird.png" alt="">
-          <div class="card-body">
-            <p class="card-text">Networks</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="{{ url_for('api', topic='networks') }}">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">
-                    API
-                  </button>
-                </a>
-                <a href="{{ url_for('cards', topic='networks') }}">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">
-                    Cards
-                  </button>
-                </a>
-                <a href="{{ url_for('quiz', topic='networks') }}">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Test</button>
-                </a>
 
-              </div>
-              <small class="text-muted">9 mins</small>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col">
-        <div class="card shadow-sm">
-          <img class="bd-placeholder-img card-img-top" width="100%" height="225" src="/static/monkey.png" alt="">
-          <div class="card-body">
-            <p class="card-text">Operating Systems</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a href="{{ url_for('api', topic='operating_systems') }}">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">
-                    API
-                  </button>
-                </a>
-                <a href="{{ url_for('cards', topic='operating_systems') }}">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">
-                    Cards
-                  </button>
-                </a>
-                <a href="{{ url_for('quiz', topic='operating_systems') }}">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Test</button>
-                </a>
+      {% endfor %}
 
-              </div>
-              <small class="text-muted">9 mins</small>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
+</div>
 
-  {% endblock %}
+
+{% endblock %}

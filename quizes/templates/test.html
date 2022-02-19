@@ -1,28 +1,8 @@
 {% extends "base.html" %}
 {% set active_page = 'test' %}
-{% block title %}Test{% endblock %}
+{% block title %}Testing Page{% endblock %}
 
 {% block content %}
 
-{% from 'bootstrap5/form.html' import render_field %}
-<p>
-    This is a test site.
-</p>
-
-
-<div class="album py-5 bg-light">
-    <div class="container">
-
-        
-
-        <form method="post">
-            {{ form.csrf_token() }}
-            {{ render_field(form.username, class='myClass') }}
-            {{ render_field(form.password, placeholder='Your Password') }}
-            {{ render_field(form.submit) }}
-        </form>
-
-    </div>
-</div>
 
 {% endblock %}
