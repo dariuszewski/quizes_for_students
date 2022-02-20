@@ -10,21 +10,35 @@
         <script language="javascript" src={{ url_for('static', filename='scripts.js') }}></script>
     </head>
     <body>
-        <div class="container">
-            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-              <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-                <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-                <span class="fs-4">Q&A for CS students</span>
-              </a>
-        
-              <ul class="nav nav-pills">
-                <li><a href="{{ url_for('welcome') }}" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary {{ 'active' if active_page == 'welcome' else '' }}">Home</button></a></li>
-                <li><a href="{{ url_for('search') }}"" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary {{ 'active' if active_page == 'search' else '' }}">Search</button></a></li>
-                <li><a href="{{ url_for('add_card') }}"" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary {{ 'active' if active_page == 'add_card' else '' }}">New Card</button></a></li>
-                <li><a href="#" class="nav-link"><button type="button" class="btn btn-md btn-outline-secondary">Home</button></a></li>
-              </ul>
-            </header>
+      <div class="header">
+          <div class="container">
+              <!-- Grid Container -->
+              <div class="row">
+                  <!-- Grid Columns -->
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                      <div class="header-title">Q&A for CS students</div>
+                  </div>
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+                      <nav>
+                          <ul class="nav nav-pills">
+                              <li><a href="{{ url_for('welcome') }}" class="nav-link"><button type="button"
+                                          class="btn btn-md btn-outline-secondary {{ 'active' if active_page == 'welcome' else '' }}">Home</button></a>
+                              </li>
+                              <li><a href="{{ url_for('search') }}"" class="nav-link"><button type="button"
+                                          class="btn btn-md btn-outline-secondary {{ 'active' if active_page == 'search' else '' }}">Search</button></a>
+                              </li>
+                              <li><a href="{{ url_for('add_card') }}"" class="nav-link"><button type="button"
+                                          class="btn btn-md btn-outline-secondary {{ 'active' if active_page == 'add_card' else '' }}">New
+                                          Card</button></a></li>
+                              <li><a href="#" class="nav-link"><button type="button"
+                                          class="btn btn-md btn-outline-secondary">Home</button></a></li>
+                          </ul>
+                      </nav>
+                  </div>
+              </div>
           </div>
+      </div>
+      <hr>
 
         {% block content %}
         {% endblock %}

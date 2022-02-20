@@ -15,6 +15,10 @@ def welcome():
 
     return render_template("welcome.html", db=Database().data)
 
+@app.route("/test/")
+def test():
+
+    return render_template("test.html")
 
 @app.route("/api/<topic>/")
 def api(topic):
